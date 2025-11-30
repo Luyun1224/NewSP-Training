@@ -164,82 +164,82 @@
             const responseRate = Math.round((count / totalTrainees) * 100);
 
             return (
-                <header className="relative bg-slate-900 text-white overflow-hidden pb-16 pt-12 px-6">
+                <header className="relative bg-slate-900 text-white overflow-hidden pb-24 pt-16 px-6 min-h-[600px]">
                 {/* 背景圖片層 */}
                 <div 
-                    className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
+                    className="absolute inset-0 z-0 opacity-50 bg-cover bg-center"
                     style={{
                     backgroundImage: "url('main.jpg')",
-                    filter: "grayscale(30%)"
+                    filter: "grayscale(20%)"
                     }}
                 ></div>
                 
                 {/* 漸層遮罩 */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900"></div>
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900"></div>
 
                 <div className="max-w-6xl mx-auto relative z-10">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                        <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wider shadow-lg shadow-orange-500/30">奇美醫院</span>
-                        <span className="text-orange-300 font-medium text-sm tracking-wide">臨床技能中心</span>
+                        <div className="flex items-center gap-3 mb-6">
+                        <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold tracking-wider shadow-lg shadow-orange-500/30">奇美醫院</span>
+                        <span className="text-orange-300 font-bold text-base tracking-wide">臨床技能中心</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight text-shadow-lg">
+                        <h1 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight text-shadow-lg">
                         標準化病人培訓工作坊
                         </h1>
                         
                         {/* 三大關鍵字 */}
-                        <div className="flex flex-wrap gap-3 text-lg md:text-xl font-light text-orange-200/90 tracking-widest mt-2">
+                        <div className="flex flex-wrap gap-4 text-xl md:text-2xl font-bold text-orange-200/90 tracking-widest mt-4">
                         <span>以人為本</span>
-                        <span className="text-white/30">x</span>
+                        <span className="text-white/40">x</span>
                         <span>建立安全感</span>
-                        <span className="text-white/30">x</span>
+                        <span className="text-white/40">x</span>
                         <span>專業傳承</span>
                         </div>
                     </div>
 
                     {/* 數據概況卡片 */}
                     <div className="mt-8 md:mt-0 flex gap-4">
-                        <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center min-w-[100px]">
-                            <div className="text-3xl font-bold text-white">{totalTrainees}</div>
-                            <div className="text-white/60 text-xs mt-1">培訓人數</div>
+                        <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 text-center min-w-[110px]">
+                            <div className="text-4xl font-black text-white">{totalTrainees}</div>
+                            <div className="text-white/70 text-sm mt-1 font-bold">培訓人數</div>
                         </div>
                         
-                        <div className="bg-orange-500/20 backdrop-blur-md p-4 rounded-2xl border border-orange-500/30 text-center min-w-[100px] relative overflow-hidden">
+                        <div className="bg-orange-500/20 backdrop-blur-md p-5 rounded-2xl border border-orange-500/30 text-center min-w-[110px] relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
-                            <div className="text-3xl font-bold text-orange-400">{responseRate}%</div>
-                            <div className="text-orange-200/60 text-xs mt-1">問卷回收率</div>
+                            <div className="text-4xl font-black text-orange-400">{responseRate}%</div>
+                            <div className="text-orange-200/70 text-sm mt-1 font-bold">問卷回收率</div>
                         </div>
                     </div>
                     </div>
 
                     {/* 理論架構區 */}
-                    <div className="grid md:grid-cols-3 gap-6 mt-12 border-t border-white/10 pt-8">
+                    <div className="grid md:grid-cols-3 gap-6 mt-16 border-t border-white/10 pt-10">
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
                         <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-orange-500/20 rounded-lg text-orange-400"><BookOpen size={20} /></div>
-                        <h3 className="font-bold text-orange-100">Miller's Pyramid</h3>
+                        <div className="p-2 bg-orange-500/20 rounded-lg text-orange-400"><BookOpen size={22} /></div>
+                        <h3 className="font-bold text-lg text-orange-100">Miller's Pyramid</h3>
                         </div>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                        從 <span className="text-orange-400">Knows</span> 到 <span className="text-orange-400">Does</span>，透過實作演練確保演出的一致性與標準化。
+                        從 <span className="text-orange-400 font-bold">Knows</span> 到 <span className="text-orange-400 font-bold">Does</span>，透過實作演練確保演出的一致性與標準化。
                         </p>
                     </div>
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
                         <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-green-500/20 rounded-lg text-green-400"><Heart size={20} /></div>
-                        <h3 className="font-bold text-green-100">以人為本的回饋</h3>
+                        <div className="p-2 bg-green-500/20 rounded-lg text-green-400"><Heart size={22} /></div>
+                        <h3 className="font-bold text-lg text-green-100">以人為本的回饋</h3>
                         </div>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                        SP 是醫學生的鏡子，重點在於給予具備溫度的<span className="text-green-400">建設性回饋</span>。
+                        SP 是醫學生的鏡子，重點在於給予具備溫度的<span className="text-green-400 font-bold">建設性回饋</span>。
                         </p>
                     </div>
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
                         <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400"><Users size={20} /></div>
-                        <h3 className="font-bold text-blue-100">社群歸屬感</h3>
+                        <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400"><Users size={22} /></div>
+                        <h3 className="font-bold text-lg text-blue-100">社群歸屬感</h3>
                         </div>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                        建立<span className="text-blue-400">心理安全感</span>，讓夥伴在模擬情境中能安心展現情感。
+                        建立<span className="text-blue-400 font-bold">心理安全感</span>，讓夥伴在模擬情境中能安心展現情感。
                         </p>
                     </div>
                     </div>
@@ -514,27 +514,33 @@
                         className="flex gap-4 animate-scroll" 
                         style={reverse ? {animationDirection: 'reverse'} : {}}
                     >
-                        {[...photos, ...photos].map((photo, index) => (
-                            <div 
-                                key={`${rowKey}-${index}`}
-                                className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-4 border-white cursor-pointer group"
-                                onClick={() => setLightboxImage(photo)}
-                            >
-                                <img 
-                                    src={photo} 
-                                    alt={`課程照片 ${index + 1}`}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                    }}
-                                />
-                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-                                        點擊放大
-                                    </span>
+                        {[...photos, ...photos].map((photo, index) => {
+                            // 修正：只使用原始照片的索引，避免重複導致錯誤
+                            const originalIndex = index % photos.length;
+                            const actualPhoto = photos[originalIndex];
+                            
+                            return (
+                                <div 
+                                    key={`${rowKey}-${index}`}
+                                    className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-4 border-white cursor-pointer group relative"
+                                    onClick={() => setLightboxImage(actualPhoto)}
+                                >
+                                    <img 
+                                        src={actualPhoto} 
+                                        alt={`課程照片`}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                        }}
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                                        <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                                            點擊放大
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                     <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
                     <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>

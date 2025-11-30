@@ -164,7 +164,7 @@
             const responseRate = Math.round((count / totalTrainees) * 100);
 
             return (
-                <header className="relative bg-slate-900 text-white overflow-hidden pb-24 pt-16 px-6 min-h-[650px]">
+                <header className="relative bg-slate-900 text-white overflow-hidden pb-24 pt-16 px-6 min-h-[700px]">
                 {/* 背景圖片層 */}
                 <div 
                     className="absolute inset-0 z-0 opacity-50 bg-cover bg-center"
@@ -200,7 +200,7 @@
                         </div>
 
                         {/* 講師名單 */}
-                        <div className="flex items-start gap-3 mb-6">
+                        <div className="flex items-start gap-3 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 mt-1">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
@@ -210,6 +210,20 @@
                         <div className="text-base text-blue-200 font-medium">
                             <span className="block">講師陣容：</span>
                             <span className="text-white/90">謝昆霖醫師、郭美金個管師、王心怡老師</span>
+                        </div>
+                        </div>
+
+                        {/* 標準化病人訓練師名單 */}
+                        <div className="flex items-start gap-3 mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400 mt-1">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <div className="text-base text-green-200 font-medium">
+                            <span className="block">標準化病人訓練師陣容：</span>
+                            <span className="text-white/90">陳巧慧訓練師、洪長鶴訓練師</span>
                         </div>
                         </div>
                         

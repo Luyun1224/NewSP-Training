@@ -64,6 +64,34 @@
         .animate-scroll:hover {
             animation-play-state: paused;
         }
+
+        /* 照片燈箱樣式 */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
@@ -461,93 +489,119 @@
         };
 
         const PhotoCarousel = () => {
+            const [lightboxImage, setLightboxImage] = useState(null);
+            
             // 照片命名為 1.jpg, 2.jpg, ... 33.jpg（無前導零）
-            const photos = Array.from({length: 33}, (_, i) => `2025images/${i + 1}.jpg`);
+            const allPhotos = Array.from({length: 33}, (_, i) => `2025images/${i + 1}.jpg`);
+            
+            // 將 33 張照片分成三列，每列 11 張
+            const row1Photos = allPhotos.slice(0, 11);
+            const row2Photos = allPhotos.slice(11, 22);
+            const row3Photos = allPhotos.slice(22, 33);
+
+            const handleDownload = (photoUrl) => {
+                const link = document.createElement('a');
+                link.href = photoUrl;
+                link.download = photoUrl.split('/').pop();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+
+            const PhotoRow = ({ photos, rowKey, reverse = false }) => (
+                <div className="relative">
+                    <div 
+                        className="flex gap-4 animate-scroll" 
+                        style={reverse ? {animationDirection: 'reverse'} : {}}
+                    >
+                        {[...photos, ...photos].map((photo, index) => (
+                            <div 
+                                key={`${rowKey}-${index}`}
+                                className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-4 border-white cursor-pointer group"
+                                onClick={() => setLightboxImage(photo)}
+                            >
+                                <img 
+                                    src={photo} 
+                                    alt={`課程照片 ${index + 1}`}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                    }}
+                                />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                                        點擊放大
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+                </div>
+            );
             
             return (
                 <div className="py-16 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-                <div className="max-w-6xl mx-auto mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800 flex items-center mb-4">
-                    <span className="w-2 h-8 bg-blue-500 mr-3 rounded-full"></span>
-                    課程回顧時光
-                    </h2>
-                    <p className="text-gray-500 ml-12">那些充滿溫度的學習瞬間</p>
-                </div>
-
-                <div className="space-y-4">
-                    {/* 第一列輪播 */}
-                    <div className="relative">
-                        <div className="flex gap-4 animate-scroll">
-                        {[...photos, ...photos].map((photo, index) => (
-                            <div 
-                            key={`row1-${index}`}
-                            className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border-4 border-white"
-                            >
-                            <img 
-                                src={photo} 
-                                alt={`課程照片 ${index + 1}`}
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                                onError={(e) => {
-                                e.target.style.display = 'none';
-                                }}
-                            />
-                            </div>
-                        ))}
-                        </div>
-                        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+                    <div className="max-w-6xl mx-auto mb-8">
+                        <h2 className="text-3xl font-bold text-gray-800 flex items-center mb-4">
+                            <span className="w-2 h-8 bg-blue-500 mr-3 rounded-full"></span>
+                            課程回顧時光
+                        </h2>
+                        <p className="text-gray-500 ml-12">那些充滿溫度的學習瞬間 · 點擊照片可放大檢視</p>
                     </div>
 
-                    {/* 第二列輪播（反向） */}
-                    <div className="relative">
-                        <div className="flex gap-4 animate-scroll" style={{animationDirection: 'reverse'}}>
-                        {[...photos, ...photos].map((photo, index) => (
-                            <div 
-                            key={`row2-${index}`}
-                            className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border-4 border-white"
-                            >
-                            <img 
-                                src={photo} 
-                                alt={`課程照片 ${index + 1}`}
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                                onError={(e) => {
-                                e.target.style.display = 'none';
-                                }}
-                            />
-                            </div>
-                        ))}
-                        </div>
-                        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+                    <div className="space-y-4">
+                        {/* 第一列 - 照片 1-11 */}
+                        <PhotoRow photos={row1Photos} rowKey="row1" />
+
+                        {/* 第二列 - 照片 12-22（反向） */}
+                        <PhotoRow photos={row2Photos} rowKey="row2" reverse={true} />
+
+                        {/* 第三列 - 照片 23-33 */}
+                        <PhotoRow photos={row3Photos} rowKey="row3" />
                     </div>
 
-                    {/* 第三列輪播 */}
-                    <div className="relative">
-                        <div className="flex gap-4 animate-scroll">
-                        {[...photos, ...photos].map((photo, index) => (
-                            <div 
-                            key={`row3-${index}`}
-                            className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border-4 border-white"
-                            >
-                            <img 
-                                src={photo} 
-                                alt={`課程照片 ${index + 1}`}
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                                onError={(e) => {
-                                e.target.style.display = 'none';
-                                }}
-                            />
-                            </div>
-                        ))}
-                        </div>
-                        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
-                    </div>
-                </div>
+                    <p className="text-center text-gray-400 mt-8 text-sm">
+                        - 將滑鼠移至照片上可暫停輪播 · 點擊照片可放大檢視 -
+                    </p>
 
-                <p className="text-center text-gray-400 mt-8 text-sm">
-                    - 將滑鼠移至照片上可暫停輪播 -
-                </p>
+                    {/* 燈箱效果 */}
+                    {lightboxImage && (
+                        <div 
+                            className="lightbox-overlay"
+                            onClick={() => setLightboxImage(null)}
+                        >
+                            <div className="absolute top-4 right-4 flex gap-3 z-10">
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDownload(lightboxImage);
+                                    }}
+                                    className="bg-white/90 hover:bg-white text-gray-800 px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 shadow-lg"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7 10 12 15 17 10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    下載
+                                </button>
+                                <button
+                                    onClick={() => setLightboxImage(null)}
+                                    className="bg-white/90 hover:bg-white text-gray-800 w-10 h-10 rounded-lg font-bold transition-all duration-200 shadow-lg"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                            <img 
+                                src={lightboxImage} 
+                                alt="放大檢視"
+                                className="lightbox-image"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                    )}
                 </div>
             );
         };

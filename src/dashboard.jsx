@@ -1,10 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, 
   RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
-  BarChart, Bar
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
-import { Heart, BookOpen, Star, Users, Lightbulb, ArrowRight, Quote, Sparkles, Loader2, TrendingUp, BrainCircuit, Activity } from 'lucide-react';
+import { Heart, BookOpen, Star, Users, ArrowRight, Quote, Sparkles, Loader2, TrendingUp, BrainCircuit } from 'lucide-react';
 
 // --- 組件設計 ---
 

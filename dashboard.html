@@ -141,7 +141,7 @@
                 <div 
                     className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
                     style={{
-                    backgroundImage: "url('2025images/01.jpg')",
+                    backgroundImage: "url('main.jpg')",
                     filter: "grayscale(30%)"
                     }}
                 ></div>
@@ -463,7 +463,7 @@
         const PhotoCarousel = () => {
             // 假設照片命名為 01.jpg, 02.jpg, ... 等等
             // 您可以根據實際檔案數量調整
-            const photos = Array.from({length: 20}, (_, i) => `2025images/${String(i + 1).padStart(2, '0')}.jpg`);
+            const photos = Array.from({length: 33}, (_, i) => `2025images/${String(i + 1).padStart(2, '0')}.jpg`);
             
             return (
                 <div className="py-16 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">

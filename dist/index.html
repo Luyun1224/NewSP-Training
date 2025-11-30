@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奇美醫院標準化病人新訓工作坊 - 成長與回饋</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #FFF7ED; /* 溫暖的淺橙色背景 */
+            color: #433422; /* 深棕色文字，比純黑更柔和 */
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+            border-left: 5px solid transparent;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            border-left-color: #F97316; /* Orange-500 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .rating-btn.selected {
+            background-color: #F97316;
+            color: white;
+            border-color: #F97316;
+            transform: scale(1.1);
+        }
+
+        /* 1-10分按鈕的選中樣式 (藍色主題 - 訓前) */
+        .rating-btn-10-blue.selected {
+            background-color: #3B82F6; /* Blue-500 */
+            color: white;
+            border-color: #3B82F6;
+        }
+
+        /* 1-10分按鈕的選中樣式 (橘色主題 - 訓後) */
+        .rating-btn-10-orange.selected {
+            background-color: #F97316; /* Orange-500 */
+            color: white;
+            border-color: #F97316;
+        }
+
+        /* 模擬紙張質感 */
+        .paper-texture {
+            background-image: radial-gradient(#d4c5b0 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+    <!-- 背景紋理 -->
+    <div class="fixed inset-0 paper-texture pointer-events-none z-0"></div>
+
+    <!-- 頂部 Hero 區域 -->
+    <header class="relative z-10 bg-white/80 backdrop-blur-md sticky top-0 border-b border-orange-100 shadow-sm">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-orange-100 p-3 rounded-full text-orange-600">
+                    <i class="fa-solid fa-seedling text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight">奇美醫院標準化病人新訓工作坊</h1>
+                    <p class="text-sm text-gray-500 mt-1">學員成長與回饋單</p>
+                </div>
+            </div>
+            <div class="hidden sm:block text-sm text-orange-600 font-medium">
+                一起學習，教學相長
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-3xl mx-auto px-4 py-8 pb-24 space-y-8">
+
+        <!-- 歡迎詞 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-orange-50">
+            <h2 class="text-xl font-bold text-orange-700 mb-4">親愛的夥伴，您好：</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+                歡迎加入醫學教育的大家庭！今天是您成為標準化病人（SP）的第一步。從最初的忐忑陌生，到今天的實作演練，很高興能與您一起經歷這段旅程。
+            </p>
+            <p class="text-gray-600 leading-relaxed text-sm bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">
+                <i class="fa-solid fa-circle-info mr-2 text-orange-500"></i>
+                這份問卷不是考試，請以輕鬆、真實的心情填寫。您的每一個建議都是我們進步的養分。
+            </p>
+        </div>
+
+        <form id="spSurveyForm" onsubmit="event.preventDefault(); submitForm();">
+            
+            <!-- 第一部分 -->
+            <section class="section-card bg-white rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                    <span class="text-2xl text-orange-500"><i class="fa-solid fa-heart-pulse"></i></span>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">第一部分：初心的萌芽</h3>
+                        <p class="text-xs text-gray-500">參與動機與感受 (1分非常不同意 - 5分非常同意)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Q1 -->
+                    <div class="question-group" data-id="q1">
+                        <label class="block font-medium text-gray-800 mb-3">1. 面對未知的挑戰：<span class="text-gray-500 font-normal text-sm">在今天課程開始「之前」，我對於擔任標準化病人感到有些緊張或陌生。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="question-group" data-id="q2">
+                        <label class="block font-medium text-gray-800 mb-3">2. 溫暖的起點：<span class="text-gray-500 font-normal text-sm">今天的迎新氛圍與破冰活動，有助於降低我的焦慮，讓我感受到團隊的歡迎。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部分 -->
+            <section class="section-card bg-white rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                    <span class="text-2xl text-emerald-500"><i class="fa-solid fa-tree"></i></span>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">第二部分：職能的種子</h3>
+                        <p class="text-xs text-gray-500">專業技能學習 (1分非常不同意 - 5分非常同意)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Q3 -->
+                    <div class="question-group" data-id="q3">
+                        <label class="block font-medium text-gray-800 mb-3">3. 理解角色任務：<span class="text-gray-500 font-normal text-sm">我清楚了解 SP 與一般演員的不同，在於我們必須「標準化」且具備「教學功能」。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="question-group" data-id="q4">
+                        <label class="block font-medium text-gray-800 mb-3">4. 劇本的生命力：<span class="text-gray-500 font-normal text-sm">講師的引導讓我了解如何閱讀劇本，並掌握角色的背景、情緒與症狀表現。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="question-group" data-id="q5">
+                        <label class="block font-medium text-gray-800 mb-3">5. 如實演出的藝術：<span class="text-gray-500 font-normal text-sm">對於如何自然地呈現病史與身體語言，我有初步的概念與掌握。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="question-group" data-id="q6">
+                        <label class="block font-medium text-gray-800 mb-3">6. 回饋的力量：<span class="text-gray-500 font-normal text-sm">我學習到如何在演練結束後，給予醫學生具體、客觀且溫暖的「建設性回饋」。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div class="question-group" data-id="q7">
+                        <label class="block font-medium text-gray-800 mb-3">7. 講師的引導：<span class="text-gray-500 font-normal text-sm">訓練師/講師的教學方式生動清晰，能耐心回應我的疑問，並給予支持。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三部分：學習曲線 -->
+            <section class="section-card bg-white rounded-2xl p-6 shadow-sm border-l-4 border-l-blue-400">
+                <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                    <span class="text-2xl text-blue-500"><i class="fa-solid fa-chart-line"></i></span>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">第三部分：看得見的成長</h3>
+                        <p class="text-xs text-gray-500">我的學習曲線 (請誠實面對自己的感覺)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Q8: Confidence Scale -->
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <label class="block font-bold text-gray-800 mb-6 text-lg">8. 信心的建立 (請點選 1-10 分)</label>
+                        
+                        <!-- Pre-training -->
+                        <div class="mb-8 question-group" data-id="q8_pre" data-theme="blue">
+                            <label class="block font-medium text-gray-800 mb-3">訓前：早上出門時的信心<br><span class="text-sm text-gray-500 font-normal">1分(忐忑) - 10分(自信)</span></label>
+                            <div class="grid grid-cols-5 sm:grid-cols-10 gap-2 rating-container-10"></div>
+                        </div>
+
+                        <!-- Post-training -->
+                        <div class="question-group" data-id="q8_post" data-theme="orange">
+                            <label class="block font-medium text-gray-800 mb-3">訓後：課程結束後的信心<br><span class="text-sm text-gray-500 font-normal">1分(仍有疑慮) - 10分(準備好了)</span></label>
+                            <div class="grid grid-cols-5 sm:grid-cols-10 gap-2 rating-container-10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Q9 -->
+                    <div class="question-group" data-id="q9">
+                        <label class="block font-medium text-gray-800 mb-3">9. 知識的跨越：<span class="text-gray-500 font-normal text-sm">經過今天的訓練，我對於「如何演出一個好病人」更有方向感了。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q10 -->
+                    <div class="question-group" data-id="q10">
+                        <label class="block font-medium text-gray-800 mb-3">10. 價值的認同：<span class="text-gray-500 font-normal text-sm">我深刻體會到 SP 在醫學教育中扮演著不可或缺的「活教材」角色。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q11 -->
+                    <div class="question-group" data-id="q11">
+                        <label class="block font-medium text-gray-800 mb-3">11. 持續精進的意願：<span class="text-gray-500 font-normal text-sm">即使今天是第一次接觸，我仍願意在未來持續參與訓練，修飾演技與回饋技巧。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四部分 -->
+            <section class="section-card bg-white rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                    <span class="text-2xl text-purple-500"><i class="fa-solid fa-mug-hot"></i></span>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">第四部分：環境與行政支持</h3>
+                        <p class="text-xs text-gray-500">舒適的環境是學習的基礎</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Q12 -->
+                    <div class="question-group" data-id="q12">
+                        <label class="block font-medium text-gray-800 mb-3">12. 行政安排：<span class="text-gray-500 font-normal text-sm">本次訓練的報名流程、通知聯繫以及時間掌控安排得宜。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+
+                    <!-- Q13 -->
+                    <div class="question-group" data-id="q13">
+                        <label class="block font-medium text-gray-800 mb-3">13. 場地與教材：<span class="text-gray-500 font-normal text-sm">訓練場地舒適，且提供的講義/劇本教材容易閱讀與理解。</span></label>
+                        <div class="flex justify-between max-w-md mx-auto rating-container gap-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第五部分：開放式問題 -->
+            <section class="section-card bg-white rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                    <span class="text-2xl text-rose-500"><i class="fa-solid fa-comment-dots"></i></span>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">第五部分：心裡的話</h3>
+                        <p class="text-xs text-gray-500">您的回饋是我們進步的動力</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block font-medium text-gray-800 mb-2">14. 今日最有感觸的一刻：<br><span class="text-sm text-gray-500 font-normal">今天最讓您印象深刻、或者覺得最有收穫的一個觀念或環節是什麼？</span></label>
+                        <textarea id="q14" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-400 outline-none transition-all bg-gray-50" rows="3" placeholder="請分享您的想法..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block font-medium text-gray-800 mb-2">15. 給我們的一句話：<br><span class="text-sm text-gray-500 font-normal">為了讓下一次的相聚更好，您有沒有什麼建議想對訓練團隊說？</span></label>
+                        <textarea id="q15" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-200 focus:border-orange-400 outline-none transition-all bg-gray-50" rows="3" placeholder="課程內容、節奏或環境建議..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 提交按鈕 -->
+            <div class="pt-4 pb-8 text-center">
+                <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg">
+                    提交回饋單 <i class="fa-solid fa-paper-plane ml-2"></i>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
+                <i class="fa-solid fa-check text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">感謝您的回饋！</h3>
+            <p class="text-gray-600 mb-8">您的意見已成功送出。<br>期待下次在排練場見！</p>
+            <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition">
+                關閉視窗
+            </button>
+        </div>
+    </div>
+    
+    <!-- Error Modal -->
+    <div id="errorModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
+                <i class="fa-solid fa-triangle-exclamation text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">傳送失敗</h3>
+            <p class="text-gray-600 mb-8" id="errorMsg">請檢查網路連線或稍後再試。</p>
+            <button onclick="document.getElementById('errorModal').classList.add('hidden')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition">
+                關閉視窗
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 設定您的 Apps Script 部署網址
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbyCHejHk-2Ah413tVX3KhhO5CCnxm8m3zZpV5tuZ6A02_bhuD6NUOAKUgrU6RYHWeSm7g/exec'; 
+
+        // 1. 自動生成 1-5 分的按鈕
+        function generateRatingButtons() {
+            const containers = document.querySelectorAll('.rating-container');
+            containers.forEach(container => {
+                const parentId = container.parentElement.getAttribute('data-id');
+                for (let i = 1; i <= 5; i++) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'rating-btn w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-orange-200 text-orange-400 font-bold flex items-center justify-center transition-all hover:bg-orange-50 focus:outline-none';
+                    btn.textContent = i;
+                    btn.dataset.value = i; // Store value
+                    btn.onclick = () => selectRating(container, btn);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        // 生成 1-10 分的按鈕
+        function generate10PointButtons() {
+            const containers = document.querySelectorAll('.rating-container-10');
+            containers.forEach(container => {
+                const parentElement = container.parentElement;
+                const parentId = parentElement.getAttribute('data-id');
+                const theme = parentElement.getAttribute('data-theme');
+                
+                let baseClass = 'w-full aspect-square rounded-lg border-2 font-bold flex items-center justify-center transition-all focus:outline-none text-sm sm:text-base ';
+                let themeClass = theme === 'blue' 
+                    ? 'rating-btn-10-blue border-blue-200 text-blue-500 hover:bg-blue-100'
+                    : 'rating-btn-10-orange border-orange-200 text-orange-500 hover:bg-orange-100';
+
+                for (let i = 1; i <= 10; i++) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = baseClass + themeClass;
+                    btn.textContent = i;
+                    btn.dataset.value = i; // Store value
+                    btn.onclick = () => selectRating(container, btn);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        // 選擇評分
+        function selectRating(container, clickedBtn) {
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            clickedBtn.classList.add('selected');
+        }
+
+        // 蒐集資料
+        function collectData() {
+            const data = {};
+            
+            // 蒐集所有評分題 (data-id)
+            document.querySelectorAll('.question-group').forEach(group => {
+                const id = group.getAttribute('data-id');
+                const selectedBtn = group.querySelector('.selected');
+                data[id] = selectedBtn ? selectedBtn.dataset.value : '';
+            });
+
+            // 蒐集文字題
+            data.q14 = document.getElementById('q14').value;
+            data.q15 = document.getElementById('q15').value;
+
+            return data;
+        }
+
+        // 提交表單
+        function submitForm() {
+            if (GAS_URL === 'YOUR_GAS_URL_HERE') {
+                alert('請先在程式碼中設定 Google Apps Script 的網址！');
+                return;
+            }
+
+            const btn = document.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            // 載入中
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> 傳送中...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            const formData = collectData();
+
+            // 使用 fetch 發送 POST
+            // 重要修改：使用 mode: 'no-cors' 來避免瀏覽器攔截回應
+            fetch(GAS_URL, {
+                method: 'POST',
+                mode: 'no-cors', // 關鍵修正：不讀取回應內容，避免 Failed to fetch
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                }
+            })
+            .then(() => {
+                // 因為是 no-cors，無論後端是否報錯，只要請求發出就算成功
+                // 我們假設資料已送出
+                showModal('successModal');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('errorMsg').innerText = '連線錯誤，請稍後再試。';
+                showModal('errorModal');
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            });
+        }
+
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modals = document.querySelectorAll('.fixed');
+            modals.forEach(modal => {
+                modal.classList.add('opacity-0');
+                const content = modal.querySelector('div');
+                if(content) {
+                    content.classList.remove('scale-100');
+                    content.classList.add('scale-95');
+                }
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            generateRatingButtons();
+            generate10PointButtons();
+        });
+    </script>
+</body>
+</html>

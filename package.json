@@ -1,6 +1,8 @@
 {
-  "name": "NewSP-Training",
-  "version": "1.0.0",
+  "name": "newsp-training",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,65 +12,22 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "gh-pages": "^4.0.0",
-    "recharts": "^2.1.0",
-    "lucide-react": "^0.1.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "vite": "^2.6.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3",
+    "lucide-react": "^0.468.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^2.0.0",
-    "eslint": "^7.32.0",
-    "vite-plugin-pages": "^4.0.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
-    }
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
-  "vite": {
-    "plugins": [
-      "@vitejs/plugin-react"
-    ],
-    "server": {
-      "port": 3000,
-      "open": true
-    },
-    "build": {
-      "outDir": "dist",
-      "assetsDir": "assets",
-      "rollupOptions": {
-        "output": {
-          "chunkFileNames": "assets/js/[name].[hash].js",
-          "entryFileNames": "assets/js/[name].[hash].js",
-          "assetFileNames": ({ name }) => {
-            if (name?.includes('.css')) {
-              return 'assets/css/[name].[hash][extname]';
-            }
-            if (name?.includes('.png') || name?.includes('.jpg') || name?.includes('.jpeg') || name?.includes('.gif')) {
-              return 'assets/img/[name].[hash][extname]';
-            }
-            return 'assets/[name].[hash][extname]';
-          }
-        }
-      }
-    }
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.13.0",
+    "vite": "^6.0.5",
+    "gh-pages": "^6.2.0"
   }
 }
